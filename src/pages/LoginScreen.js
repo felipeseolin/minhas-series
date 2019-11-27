@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet, Button} from 'react-native';
 
 import FormRow from '../components/FormRow';
 
@@ -17,6 +17,10 @@ export default class LoginScreen extends React.Component {
     this.setState({
       [field]: valor
     });
+  }
+
+  processLogin() {
+    console.log(this.state);
   }
 
   render() {
@@ -43,6 +47,8 @@ export default class LoginScreen extends React.Component {
             }}
           />
         </FormRow>
+
+        <Button title="Entrar" onPress={() => {this.processLogin()}} />
       </View>
     );
   }
