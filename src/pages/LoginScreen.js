@@ -8,7 +8,17 @@ export default class LoginScreen extends React.Component {
     return (
       <View>
         <FormRow>
-          <TextInput style={styles.textInput} />
+          <TextInput
+            style={styles.textInput}
+            placeholder="E-mail: user@provide.com"
+          />
+        </FormRow>
+        <FormRow>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Enter your password here"
+            secureTextEntry
+          />
         </FormRow>
       </View>
     );
@@ -19,6 +29,7 @@ const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: 'gray',
-    marginTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
