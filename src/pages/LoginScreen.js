@@ -4,6 +4,21 @@ import {View, TextInput, StyleSheet} from 'react-native';
 import FormRow from '../components/FormRow';
 
 export default class LoginScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
+  onChangeHandler(field, valor) {
+    this.setState({
+      [field]: valor
+    });
+  }
+
   render() {
     return (
       <View>
@@ -11,6 +26,10 @@ export default class LoginScreen extends React.Component {
           <TextInput
             style={styles.textInput}
             placeholder="E-mail: user@provide.com"
+            value={this.state.email}
+            onChangeText={valor => {
+              this.onChangeHandler('email', valor);
+            }}
           />
         </FormRow>
         <FormRow>
@@ -18,6 +37,10 @@ export default class LoginScreen extends React.Component {
             style={styles.textInput}
             placeholder="Enter your password here"
             secureTextEntry
+            value={this.state.password}
+            onChange={valor => {
+              this.onChangeHandler('password', valor);
+            }}
           />
         </FormRow>
       </View>
