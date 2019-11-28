@@ -127,6 +127,8 @@ class LoginScreen extends React.Component {
             onChangeText={valor => {
               this.onChangeHandler('email', valor);
             }}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
         </FormRow>
         <FormRow>
