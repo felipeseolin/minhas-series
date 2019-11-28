@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 const SerieCard = ({serie}) => (
   <View style={styles.container}>
     <View style={styles.card}>
+      <Image source={{uri: serie.img}} aspectRatio={1} resizeMode="cover" />
       <Text>{`${serie.id} - ${serie.title}`}</Text>
     </View>
   </View>
