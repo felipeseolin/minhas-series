@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, Button} from 'react-native';
+import {View, TextInput, StyleSheet, Button, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 
 import FormRow from '../components/FormRow';
@@ -11,6 +11,7 @@ export default class LoginScreen extends React.Component {
     this.state = {
       email: '',
       password: '',
+      isLoading: false,
     };
   }
 
@@ -30,11 +31,6 @@ export default class LoginScreen extends React.Component {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    firebase
-      .auth()
-      .signInWithEmailAndPassword('teste@email.com', '123456')
-      .then(user => console.log('ok. logado', user))
-      .catch(error => console.log('erro!', error));
   }
 
   onChangeHandler(field, valor) {
@@ -44,7 +40,29 @@ export default class LoginScreen extends React.Component {
   }
 
   processLogin() {
-    console.log(this.state);
+    this.setState({ isLoading: true });
+    const {email, password} = this.state;
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(user => console.log('ok. logado', user))
+      .catch(error => console.log('erro!', error))
+      .then(() => this.setState({ isLoading: false }));
+  }
+
+  renderButton() {
+    if (this.state.isLoading)
+      return <ActivityIndicator/>
+
+    return (
+      <Button
+        title="Entrar"
+        onPress={() => {
+          this.processLogin();
+        }}
+      />
+    );
   }
 
   render() {
@@ -66,18 +84,13 @@ export default class LoginScreen extends React.Component {
             placeholder="Enter your password here"
             secureTextEntry
             value={this.state.password}
-            onChange={valor => {
+            onChangeText={valor => {
               this.onChangeHandler('password', valor);
             }}
           />
         </FormRow>
 
-        <Button
-          title="Entrar"
-          onPress={() => {
-            this.processLogin();
-          }}
-        />
+        { this.renderButton() }
       </View>
     );
   }
