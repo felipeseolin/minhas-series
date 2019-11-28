@@ -11,8 +11,10 @@ import {
 import * as firebase from 'firebase';
 
 import FormRow from '../components/FormRow';
+import {processLogin} from '../actions';
+import {connect} from 'react-redux';
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -52,49 +54,7 @@ export default class LoginScreen extends React.Component {
     this.setState({isLoading: true});
     const {email, password} = this.state;
 
-    const loginUserSuccess = user => {
-      this.setState({message: 'Sucesso!'});
-      this.props.navigation.navigate('Main');
-    };
-
-    const loginUserFailed = error => {
-      this.setState({message: this.getMessageByError(error.code)});
-    };
-
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(loginUserSuccess)
-      .catch(error => {
-        if (error.code == 'auth/user-not-found') {
-          Alert.alert(
-            'Usuário não encontrado',
-            'Deseja criar um novo usuário?',
-            [
-              {
-                text: 'Não',
-                onPress: () => {
-                  console.log('não quis');
-                },
-              },
-              {
-                text: 'Sim',
-                onPress: () => {
-                  firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(email, password)
-                    .then(loginUserSuccess)
-                    .catch(loginUserFailed);
-                },
-              },
-            ],
-            {cancelable: false},
-          );
-        } else {
-          loginUserFailed(error);
-        }
-      })
-      .then(() => this.setState({isLoading: false}));
+    this.props.processLogin({email, password});
   }
 
   getMessageByError(code) {
@@ -114,7 +74,7 @@ export default class LoginScreen extends React.Component {
   }
 
   renderButton() {
-    if (this.state.isLoading) return <ActivityIndicator />;
+    if (this.state.isLoading) {return <ActivityIndicator />;}
 
     return (
       <Button
@@ -129,7 +89,7 @@ export default class LoginScreen extends React.Component {
   renderMessage() {
     const {message} = this.state;
 
-    if (!message) return null;
+    if (!message) {return null;}
 
     return (
       <View>
@@ -178,3 +138,8 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
 });
+
+export default connect(
+  null,
+  {processLogin},
+)(LoginScreen);
