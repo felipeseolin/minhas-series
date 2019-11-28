@@ -2,13 +2,17 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginScreen from './src/pages/LoginScreen';
+import SeriesScreen from './src/pages/SeriesScreen';
 
 const AppNavigator = createStackNavigator({
-  Login: {
+  'Login': {
     screen: LoginScreen,
     navigationOptions: {
       title: 'Bem vindo',
     }
+  },
+  'Main': {
+    screen: SeriesScreen
   },
 }, {
   defaultNavigationOptions: {
