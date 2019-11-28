@@ -11,7 +11,13 @@ const SeriesPage = props => (
     <FlatList
       data={series}
       renderItem={({item, index}) => (
-        <SerieCard serie={item} isLeft={isLeft(index)} />
+        <SerieCard
+          serie={item}
+          isLeft={isLeft(index)}
+          onNavigate={() =>
+            props.navigation.navigate('SerieDetail', {serie: item})
+          }
+        />
       )}
       keyExtractor={item => item.id.toString()}
       numColumns={2}
