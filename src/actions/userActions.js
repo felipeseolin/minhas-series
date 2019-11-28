@@ -13,7 +13,7 @@ const userLogout = () => ({
 });
 
 export const processLogin = ({email, password}) => dispatch => {
-  firebase
+  return firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((user) => {

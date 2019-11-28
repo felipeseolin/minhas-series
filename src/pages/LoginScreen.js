@@ -54,27 +54,29 @@ class LoginScreen extends React.Component {
     this.setState({isLoading: true});
     const {email, password} = this.state;
 
-    this.props.processLogin({email, password});
+    this.props.processLogin({email, password}).then(() => {
+      this.setState({message: 'Sucesso!'});
+      this.props.navigation.replace('Main');
+    });
   }
 
   getMessageByError(code) {
     switch (code) {
       case 'auth/user-not-found':
         return 'E-mail inexistente';
-        break;
       case 'auth/wrong-password':
         return 'Senha incorreta';
       case 'auth/invalid-email':
         return 'Digite um e-mail válido';
-        break;
       default:
         return 'Erro desconhecido';
-        break;
     }
   }
 
   renderButton() {
-    if (this.state.isLoading) {return <ActivityIndicator />;}
+    if (this.state.isLoading) {
+      return <ActivityIndicator />;
+    }
 
     return (
       <Button
@@ -89,7 +91,9 @@ class LoginScreen extends React.Component {
   renderMessage() {
     const {message} = this.state;
 
-    if (!message) {return null;}
+    if (!message) {
+      return null;
+    }
 
     return (
       <View>
@@ -139,7 +143,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  null,
-  {processLogin},
-)(LoginScreen);
+export default connect(null, {processLogin})(LoginScreen);
