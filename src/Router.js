@@ -18,6 +18,12 @@ const AppNavigator = createStackNavigator(
     },
     SerieDetail: {
       screen: SerieDetailScreen,
+      navigationOptions: ({navigation}) => {
+        const {serie} = navigation.state.params;
+        return {
+          title: serie.title,
+        };
+      },
     },
   },
   {
