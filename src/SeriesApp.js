@@ -1,11 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
+import devToolsEnhancer from 'remote-redux-devtools';
 
 import Router from './Router';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, devToolsEnhancer());
 
 const SeriesApp = prop => (
   <Provider store={store}>
