@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, Button, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Button,
+  ActivityIndicator,
+} from 'react-native';
 import * as firebase from 'firebase';
 
 import FormRow from '../components/FormRow';
@@ -12,6 +19,7 @@ export default class LoginScreen extends React.Component {
       email: '',
       password: '',
       isLoading: false,
+      message: '',
     };
   }
 
@@ -40,20 +48,35 @@ export default class LoginScreen extends React.Component {
   }
 
   processLogin() {
-    this.setState({ isLoading: true });
+    this.setState({isLoading: true});
     const {email, password} = this.state;
 
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(user => console.log('ok. logado', user))
-      .catch(error => console.log('erro!', error))
-      .then(() => this.setState({ isLoading: false }));
+      .then(user => this.setState({ message: 'Login realizado com sucesso!'}))
+      .catch(error => this.setState({ message: this.getMessageByError(error.code)}))
+      .then(() => this.setState({isLoading: false}));
+  }
+
+  getMessageByError(code) {
+    switch (code) {
+      case "auth/user-not-found":
+        return "E-mail inexistente";
+        break;
+      case "auth/wrong-password":
+        return "Senha incorreta";
+      case "auth/invalid-email":
+        return "Digite um e-mail válido";
+        break;
+      default:
+        return "Erro desconhecido";
+        break;
+    }
   }
 
   renderButton() {
-    if (this.state.isLoading)
-      return <ActivityIndicator/>
+    if (this.state.isLoading) return <ActivityIndicator />;
 
     return (
       <Button
@@ -62,6 +85,18 @@ export default class LoginScreen extends React.Component {
           this.processLogin();
         }}
       />
+    );
+  }
+
+  renderMessage() {
+    const {message} = this.state;
+
+    if (!message) return null;
+
+    return (
+      <View>
+        <Text>{message}</Text>
+      </View>
     );
   }
 
@@ -90,7 +125,8 @@ export default class LoginScreen extends React.Component {
           />
         </FormRow>
 
-        { this.renderButton() }
+        {this.renderButton()}
+        {this.renderMessage()}
       </View>
     );
   }
