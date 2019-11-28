@@ -14,7 +14,8 @@ const SerieCard = ({serie}) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 0.5,
+    width: '50%',
     padding: 10,
     height: Dimensions.get('window').width / 2,
   },
