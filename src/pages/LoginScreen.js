@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, Button} from 'react-native';
+import * as firebase from 'firebase';
 
 import FormRow from '../components/FormRow';
 
@@ -13,9 +14,32 @@ export default class LoginScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: 'AIzaSyBB6jcVddcJCXgjMUjaiHABQv4UmZQ79KM',
+      authDomain: 'minhasseries-7c769.firebaseapp.com',
+      databaseURL: 'https://minhasseries-7c769.firebaseio.com',
+      projectId: 'minhasseries-7c769',
+      storageBucket: 'minhasseries-7c769.appspot.com',
+      messagingSenderId: '122111905510',
+      appId: '1:122111905510:web:feff1f6767bff6630e3527',
+      measurementId: 'G-XHV4YS21EG',
+    };
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword('teste@email.com', '123456')
+      .then(user => console.log('ok. logado', user))
+      .catch(error => console.log('erro!', error));
+  }
+
   onChangeHandler(field, valor) {
     this.setState({
-      [field]: valor
+      [field]: valor,
     });
   }
 
@@ -48,7 +72,12 @@ export default class LoginScreen extends React.Component {
           />
         </FormRow>
 
-        <Button title="Entrar" onPress={() => {this.processLogin()}} />
+        <Button
+          title="Entrar"
+          onPress={() => {
+            this.processLogin();
+          }}
+        />
       </View>
     );
   }
