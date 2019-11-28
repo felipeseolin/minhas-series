@@ -19,6 +19,7 @@ export const processLogin = ({email, password}) => dispatch => {
     .then(user => {
       const action = userLoginSucess(user);
       dispatch(action);
+      return user;
     })
     .catch(error => {
       if (error.code == 'auth/user-not-found') {
@@ -29,7 +30,9 @@ export const processLogin = ({email, password}) => dispatch => {
             [
               {
                 text: 'Não',
-                onPress: () => {},
+                onPress: () => {
+                  resolve();
+                },
               },
               {
                 text: 'Sim',

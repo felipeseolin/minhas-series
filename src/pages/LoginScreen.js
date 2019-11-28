@@ -56,12 +56,21 @@ class LoginScreen extends React.Component {
 
     this.props
       .processLogin({email, password})
-      .then(() => {
-        this.setState({message: 'Sucesso!'});
-        this.props.navigation.replace('Main');
+      .then(user => {
+        if (user) {
+          this.props.navigation.replace('Main');
+        } else {
+          this.setState({
+            isLoading: false,
+            message: '',
+          });
+        }
       })
       .catch(error => {
-        this.setState({message: error.code});
+        this.setState({
+          isLoading: false,
+          message: this.getMessageByError(error.code),
+        });
       });
   }
 
