@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 
-const SerieCard = ({serie}) => (
-  <View style={styles.container}>
+const SerieCard = ({serie, isLeft}) => (
+  <View
+    style={[styles.container, isLeft ? styles.leftColumn : styles.rightColumn]}>
     <View style={styles.card}>
       <Image source={{uri: serie.img}} aspectRatio={1} resizeMode="cover" />
       <View style={styles.cardTitleContainer}>
@@ -16,12 +17,13 @@ const styles = StyleSheet.create({
   container: {
     // flex: 0.5,
     width: '50%',
-    padding: 10,
+    padding: 5,
     height: Dimensions.get('window').width / 2,
   },
   card: {
     flex: 1,
     borderWidth: 1,
+    // margin: 10,
   },
   cardTitleContainer: {
     backgroundColor: 'black',
@@ -40,6 +42,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  leftColumn: {
+    paddingLeft: 10,
+  },
+  rightColumn: {
+    paddingRight: 10,
   },
 });
 
