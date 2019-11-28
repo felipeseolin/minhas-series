@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 
 export default class SerieDetailScreen extends React.Component {
   render() {
@@ -7,8 +7,15 @@ export default class SerieDetailScreen extends React.Component {
 
     return (
       <View>
+        <Image source={{uri: serie.img}} style={styles.image} />
         <Text>{serie.title}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  image: {
+    aspectRatio: 1,
+  },
+});
