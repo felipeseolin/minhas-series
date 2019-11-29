@@ -8,6 +8,7 @@ import {
   ScrollView,
   Button,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {setField, saveSerie} from '../actions';
@@ -86,9 +87,14 @@ class NewSerieScreen extends React.Component {
             title="Salvar"
             onPress={async () => {
               this.setState({isLoading: true});
-              await saveSerie(serieForm);
-              this.setState({isLoading: false});
-              navigation.goBack();
+              try {
+                await saveSerie(serieForm);
+                navigation.goBack();
+              } catch (error) {
+                Alert.alert('Erro', error.message);
+              } finally {
+                this.setState({isLoading: false});
+              }
             }}
           />
         )}
