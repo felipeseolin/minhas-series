@@ -20,7 +20,7 @@ class NewSerieScreen extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true,
+      isLoading: false,
     };
   }
 
@@ -79,24 +79,20 @@ class NewSerieScreen extends React.Component {
           />
         </FormRow>
 
-        {this.renderButton()}
+        {this.state.isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <Button
+            title="Salvar"
+            onPress={async () => {
+              this.setState({isLoading: true});
+              await saveSerie(serieForm);
+              this.setState({isLoading: false});
+              navigation.goBack();
+            }}
+          />
+        )}
       </ScrollView>
-    );
-  }
-
-  renderButton() {
-    if (this.state.isLoading) {
-      return <ActivityIndicator />;
-    }
-
-    return (
-      <Button
-        title="Salvar"
-        onPress={async () => {
-          await saveSerie(serieForm);
-          navigation.goBack();
-        }}
-      />
     );
   }
 }
