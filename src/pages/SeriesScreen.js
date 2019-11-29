@@ -13,7 +13,7 @@ const SeriesPage = props => (
       data={[...series, {isLast: true}]}
       renderItem={({item, index}) => {
         return item.isLast ? (
-          <AddCard />
+          <AddCard onNavigate={() => props.navigation.navigate('NewSerie')} />
         ) : (
           <SerieCard
             serie={item}

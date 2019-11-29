@@ -4,6 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import LoginScreen from './pages/LoginScreen';
 import SeriesScreen from './pages/SeriesScreen';
 import SerieDetailScreen from './pages/SerieDetailScreen';
+import NewSerieScreen from './pages/NewSerieScreen';
 
 const AppNavigator = createStackNavigator(
   {
@@ -23,6 +24,12 @@ const AppNavigator = createStackNavigator(
         return {
           title: serie.title,
         };
+      },
+    },
+    NewSerie: {
+      screen: NewSerieScreen,
+      navigationOptions: {
+        title: 'Nova série',
       },
     },
   },
