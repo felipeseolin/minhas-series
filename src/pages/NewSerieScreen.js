@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text, TextInput, Picker} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Picker,
+  ScrollView,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {setField} from '../actions';
 import Slider from '@react-native-community/slider';
@@ -7,7 +14,7 @@ import Slider from '@react-native-community/slider';
 import FormRow from '../components/FormRow';
 
 const NewSerieScreen = ({serieForm, setField}) => (
-  <View>
+  <ScrollView>
     <FormRow>
       <TextInput
         style={styles.textInput}
@@ -60,7 +67,7 @@ const NewSerieScreen = ({serieForm, setField}) => (
         multiline={true}
       />
     </FormRow>
-  </View>
+  </ScrollView>
 );
 
 const styles = StyleSheet.create({
