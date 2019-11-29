@@ -44,9 +44,12 @@ class SeriesPage extends React.Component {
 const styles = StyleSheet.create({});
 
 const mapStateToProps = state => {
-  return {
-    series: state.listaSeries,
-  };
+  const {listaSeries} = state;
+  const keys = Object.keys(listaSeries);
+  const listaSeriesWithId = keys.map(key => {
+    return {...listaSeries[key], id: key};
+  });
+  return {series: listaSeriesWithId};
 };
 
 export default connect(mapStateToProps, {watchSeries})(SeriesPage);
