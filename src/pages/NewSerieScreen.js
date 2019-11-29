@@ -68,10 +68,9 @@ const NewSerieScreen = ({serieForm, setField, saveSerie, navigation}) => (
     </FormRow>
     <Button
       title="Salvar"
-      onPress={() => {
-        saveSerie(serieForm).then(() => {
-          navigation.goBack();
-        });
+      onPress={async () => {
+        await saveSerie(serieForm);
+        navigation.goBack();
       }}
     />
   </ScrollView>
