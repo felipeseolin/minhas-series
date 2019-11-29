@@ -1,4 +1,4 @@
-import SET_FIELD from '../actions';
+import {SET_FIELD} from '../actions';
 
 const INITIAL_STATE = {
   title: '',
