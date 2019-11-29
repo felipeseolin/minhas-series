@@ -11,10 +11,16 @@ const NewSerieScreen = ({serieForm, setField}) => (
       <TextInput
         style={styles.textInput}
         placeholder="Título"
-        value={serieForm}
-        onChangeText={value => {
-          setField('title', value);
-        }}
+        value={serieForm.title}
+        onChangeText={value => setField('title', value)}
+      />
+    </FormRow>
+    <FormRow>
+      <TextInput
+        style={styles.textInput}
+        placeholder="URL da imagem"
+        value={serieForm.img}
+        onChangeText={value => setField('img', value)}
       />
     </FormRow>
   </View>
