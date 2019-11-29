@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScroolView, View, Text, Image, StyleSheet} from 'react-native';
 import Line from '../components/Line';
+import LongText from '../components/LongText';
 
 export default class SerieDetailScreen extends React.Component {
   render() {
