@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-const watchSeries = () => {
+export const watchSeries = () => {
   const {currentUser} = firebase.auth();
   return dispatch => {
     firebase
