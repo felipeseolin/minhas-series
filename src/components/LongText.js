@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 
 export default class LongText extends React.Component {
   constructor(props) {
@@ -10,6 +10,14 @@ export default class LongText extends React.Component {
     };
   }
 
+  changeIsExpanded() {
+    const {isExpanded} = this.state;
+
+    this.setState({
+      isExpanded: !isExpanded,
+    });
+  }
+
   render() {
     const {isExpanded} = this.state;
     const {label = '', content = '-'} = this.props;
@@ -17,14 +25,19 @@ export default class LongText extends React.Component {
     return (
       <View style={styles.line}>
         <Text style={[styles.cell, styles.label]}>{label}</Text>
-        <Text
-          style={[
-            styles.cell,
-            styles.content,
-            isExpanded ? styles.expanded : styles.collapsed,
-          ]}>
-          {content}
-        </Text>
+
+        <TouchableWithoutFeedback onPress={() => this.changeIsExpanded()}>
+          <View>
+            <Text
+              style={[
+                styles.cell,
+                styles.content,
+                isExpanded ? styles.expanded : styles.collapsed,
+              ]}>
+              {content}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     );
   }
