@@ -1,6 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+} from 'react-native';
 
+if (
+  Platform.OS === 'android' &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 export default class LongText extends React.Component {
   constructor(props) {
     super(props);
@@ -8,6 +22,10 @@ export default class LongText extends React.Component {
     this.state = {
       isExpanded: false,
     };
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    LayoutAnimation.spring();
   }
 
   changeIsExpanded() {
