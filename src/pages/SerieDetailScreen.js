@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {ScroolView, View, Text, Image, StyleSheet} from 'react-native';
+import Line from '../components/Line';
 
 export default class SerieDetailScreen extends React.Component {
   render() {
@@ -8,7 +9,10 @@ export default class SerieDetailScreen extends React.Component {
     return (
       <View>
         <Image source={{uri: serie.img}} style={styles.image} />
-        <Text>{serie.title}</Text>
+        <Line label="Título" content={serie.title} />
+        <Line label="Gênero" content={serie.gender} />
+        <Line label="Nota" content={serie.rate} />
+        <Line label="Descrição" content={serie.description} />
       </View>
     );
   }
