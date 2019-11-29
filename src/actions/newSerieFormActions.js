@@ -12,9 +12,11 @@ export const setField = (field, value) => {
 
 export const saveSerie = serie => {
   const {currentUser} = firebase.auth();
-  const db = firebase
+  firebase
     .database()
-    .ref(`/users/${currentUser.displayName}/series`);
-
-  console.log('serie que vai ser salva', serie);
+    .ref(`/users/${currentUser.uid}/series`)
+    .push(serie)
+    .then(() => {
+      console.log('analise o console do firebase ');
+    });
 };
