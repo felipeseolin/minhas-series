@@ -13,7 +13,7 @@ export default class SerieDetailScreen extends React.Component {
         <Line label="Título" content={serie.title} />
         <Line label="Gênero" content={serie.gender} />
         <Line label="Nota" content={serie.rate} />
-        <Line label="Descrição" content={serie.description} />
+        <LongText label="Descrição" content={serie.description} />
       </View>
     );
   }

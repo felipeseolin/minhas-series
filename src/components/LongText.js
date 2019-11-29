@@ -1,21 +1,34 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const LongText = ({label, content = '-'}) => {
-  return (
-    <View style={styles.line}>
-      <Text
-        style={[
-          styles.cell,
-          styles.label,
-          label.length > 8 ? styles.longLabel : null,
-        ]}>
-        {label}
-      </Text>
-      <Text style={[styles.cell, styles.content]}>{content}</Text>
-    </View>
-  );
-};
+export default class LongText extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isExpanded: false,
+    };
+  }
+
+  render() {
+    const {isExpanded} = this.state;
+    const {label = '', content = '-'} = this.props;
+
+    return (
+      <View style={styles.line}>
+        <Text style={[styles.cell, styles.label]}>{label}</Text>
+        <Text
+          style={[
+            styles.cell,
+            styles.content,
+            isExpanded ? styles.expanded : styles.collapsed,
+          ]}>
+          {content}
+        </Text>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   line: {
@@ -35,6 +48,10 @@ const styles = StyleSheet.create({
   content: {
     flex: 3,
   },
+  collapsed: {
+    maxHeight: 60,
+  },
+  expanded: {
+    flex: 1,
+  },
 });
-
-export default LongText;
