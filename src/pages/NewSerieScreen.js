@@ -9,12 +9,12 @@ import {
   Button,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {setField} from '../actions';
+import {setField, saveSerie} from '../actions';
 import Slider from '@react-native-community/slider';
 
 import FormRow from '../components/FormRow';
 
-const NewSerieScreen = ({serieForm, setField}) => (
+const NewSerieScreen = ({serieForm, setField, saveSerie}) => (
   <ScrollView>
     <FormRow>
       <TextInput
@@ -66,7 +66,12 @@ const NewSerieScreen = ({serieForm, setField}) => (
         multiline={true}
       />
     </FormRow>
-    <Button title="Salvar" onPress={() => {}} />
+    <Button
+      title="Salvar"
+      onPress={() => {
+        saveSerie(serieForm);
+      }}
+    />
   </ScrollView>
 );
 
@@ -86,6 +91,6 @@ const mapStateToProps = state => {
   return {serieForm: state.serieForm};
 };
 
-const mapDispatchToProps = {setField};
+const mapDispatchToProps = {setField, saveSerie};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewSerieScreen);
