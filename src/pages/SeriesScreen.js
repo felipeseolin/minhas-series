@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
 
 import SerieCard from '../components/SerieCard';
+import AddCard from '../components/AddCard';
 import series from '../../series.json';
 
 const isLeft = number => number % 2 === 0;
@@ -12,9 +13,7 @@ const SeriesPage = props => (
       data={[...series, {isLast: true}]}
       renderItem={({item, index}) => {
         return item.isLast ? (
-          <View>
-            <Text>Botao adicionar</Text>
-          </View>
+          <AddCard />
         ) : (
           <SerieCard
             serie={item}
