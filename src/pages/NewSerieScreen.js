@@ -49,6 +49,17 @@ const NewSerieScreen = ({serieForm, setField}) => (
         onValueChange={value => setField('rate', value)}
       />
     </FormRow>
+
+    <FormRow>
+      <TextInput
+        style={styles.textInput}
+        placeholder="Descrição"
+        value={serieForm.description}
+        onChangeText={value => setField('description', value)}
+        numberOfLines={5}
+        multiline={true}
+      />
+    </FormRow>
   </View>
 );
 
