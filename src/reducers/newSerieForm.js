@@ -1,10 +1,20 @@
-import {SET_FIELD} from '../actions/newSerieFormActions';
+import SET_FIELD from '../actions';
 
-export default function(state = {}, action) {
+const INITIAL_STATE = {
+  title: '',
+  gender: '',
+  rate: 0,
+  img: '',
+  description: '',
+};
+
+export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_FIELD:
-      return '';
+      const clonedState = {...state};
+      clonedState[action.field] = action.value;
+      return clonedState;
     default:
-      return {};
+      return state;
   }
 }
