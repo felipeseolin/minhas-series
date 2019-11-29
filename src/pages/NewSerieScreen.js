@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, TextInput, Picker} from 'react-native';
 import {connect} from 'react-redux';
 import {setField} from '../actions';
+import Slider from '@react-native-community/slider';
 
 import FormRow from '../components/FormRow';
 
@@ -33,6 +34,15 @@ const NewSerieScreen = ({serieForm, setField}) => (
         <Picker.Item label="Drama" value="drama" />
         <Picker.Item label="Infantil" value="kids" />
       </Picker>
+    </FormRow>
+
+    <FormRow>
+      <Slider
+        minimumValue={0}
+        maximumValue={100}
+        value={serieForm.rate}
+        onValueChange={value => setField('rate', value)}
+      />
     </FormRow>
   </View>
 );
