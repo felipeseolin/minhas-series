@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import {connect} from 'react-redux';
 
 import SerieCard from '../components/SerieCard';
@@ -14,6 +20,10 @@ class SeriesPage extends React.Component {
   }
 
   render() {
+    if (this.props.series === null) {
+      return <ActivityIndicator />;
+    }
+
     return (
       <View>
         <FlatList
@@ -45,6 +55,11 @@ const styles = StyleSheet.create({});
 
 const mapStateToProps = state => {
   const {listaSeries} = state;
+
+  if (listaSeries === null) {
+    return {series: listaSeries};
+  }
+
   const keys = Object.keys(listaSeries);
   const listaSeriesWithId = keys.map(key => {
     return {...listaSeries[key], id: key};
