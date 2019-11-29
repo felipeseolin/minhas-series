@@ -14,7 +14,7 @@ import Slider from '@react-native-community/slider';
 
 import FormRow from '../components/FormRow';
 
-const NewSerieScreen = ({serieForm, setField, saveSerie}) => (
+const NewSerieScreen = ({serieForm, setField, saveSerie, navigation}) => (
   <ScrollView>
     <FormRow>
       <TextInput
@@ -69,7 +69,9 @@ const NewSerieScreen = ({serieForm, setField, saveSerie}) => (
     <Button
       title="Salvar"
       onPress={() => {
-        saveSerie(serieForm);
+        saveSerie(serieForm).then(() => {
+          navigation.goBack();
+        });
       }}
     />
   </ScrollView>
