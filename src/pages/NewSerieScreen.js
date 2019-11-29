@@ -6,6 +6,7 @@ import {
   TextInput,
   Picker,
   ScrollView,
+  Button,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {setField} from '../actions';
@@ -42,21 +43,19 @@ const NewSerieScreen = ({serieForm, setField}) => (
         <Picker.Item label="Infantil" value="kids" />
       </Picker>
     </FormRow>
-
     <FormRow>
       <View style={styles.rate}>
         <Text>Nota: </Text>
-        <Text>{serieForm.Nota}</Text>
+        <Text>{serieForm.rate}</Text>
       </View>
       <Slider
         minimumValue={0}
         maximumValue={100}
-        step={1}
+        step={5}
         value={serieForm.rate}
         onValueChange={value => setField('rate', value)}
       />
     </FormRow>
-
     <FormRow>
       <TextInput
         style={styles.textInput}
@@ -67,6 +66,7 @@ const NewSerieScreen = ({serieForm, setField}) => (
         multiline={true}
       />
     </FormRow>
+    <Button title="Salvar" onPress={() => {}} />
   </ScrollView>
 );
 
