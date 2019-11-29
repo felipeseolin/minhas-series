@@ -1,12 +1,29 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
+
+import FormRow from '../components/FormRow';
 
 const NewSerieScreen = props => (
   <View>
-    <Text>Nova Serie</Text>
+    <FormRow>
+      <TextInput
+        style={styles.textInput}
+        placeholder="Título"
+        value=""
+        onChangeText={value => {
+          console.log(value);
+        }}
+      />
+    </FormRow>
   </View>
 );
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  textInput: {
+    paddingBottom: 5,
+    paddingRight: 5,
+    paddingLeft: 5,
+  }
+});
 
 export default NewSerieScreen;
