@@ -10,6 +10,13 @@ export const setField = (field, value) => {
   };
 };
 
+export const SERIE_SAVED_SUCCESS = 'SERIE_SAVED_SUCCESS';
+export const serieSavedSuccess = () => {
+  return {
+    type: SERIE_SAVED_SUCCESS,
+  };
+};
+
 export const saveSerie = serie => {
   const {currentUser} = firebase.auth();
 
@@ -17,6 +24,7 @@ export const saveSerie = serie => {
     return await firebase
       .database()
       .ref(`/users/${currentUser.uid}/series`)
-      .push(serie);
+      .push(serie)
+      .then(() => dispatch(serieSavedSuccess()));
   };
 };
