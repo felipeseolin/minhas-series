@@ -1,8 +1,10 @@
-import {} from '../actions';
-import series from '../../series.json';
+import {SET_SERIES} from '../actions';
 
-const INITIAL_STATE = series;
-
-export default function(state = INITIAL_STATE, action) {
-  return state;
+export default function(state = {}, action) {
+  switch (action.type) {
+    case SET_SERIES:
+      return action.series;
+    default:
+      return state;
+  }
 }

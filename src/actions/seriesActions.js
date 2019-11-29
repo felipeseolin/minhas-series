@@ -1,5 +1,12 @@
 import firebase from 'firebase';
 
+export const SET_SERIES = 'SET_SERIES';
+
+const setSeries = series => ({
+  type: SET_SERIES,
+  series: series,
+});
+
 export const watchSeries = () => {
   const {currentUser} = firebase.auth();
   return dispatch => {
@@ -7,7 +14,9 @@ export const watchSeries = () => {
       .database()
       .ref(`/users/${currentUser.uid}/series`)
       .on('value', snapshot => {
-        console.log(snapshot.val());
+        const series = snapshot.val();
+        const action = setSeries(series);
+        dispatch(action);
       });
   };
 };
