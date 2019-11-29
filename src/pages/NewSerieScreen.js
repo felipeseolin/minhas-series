@@ -37,7 +37,7 @@ const NewSerieScreen = ({serieForm, setField, saveSerie}) => (
       <Picker
         selectedValue={serieForm.gender}
         onValueChange={item => setField('gender', item)}>
-        <Picker.Item label="Ação" value="acao" />
+        <Picker.Item label="Ação" value="action" />
         <Picker.Item label="Comédia" value="comedy" />
         <Picker.Item label="Drama" value="drama" />
         <Picker.Item label="Infantil" value="kids" />

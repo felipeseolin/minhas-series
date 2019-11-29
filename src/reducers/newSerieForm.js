@@ -2,7 +2,7 @@ import {SET_FIELD} from '../actions';
 
 const INITIAL_STATE = {
   title: '',
-  gender: '',
+  gender: 'action',
   rate: 0,
   img: '',
   description: '',
