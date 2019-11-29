@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, Picker} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Picker} from 'react-native';
 import {connect} from 'react-redux';
 import {setField} from '../actions';
 import Slider from '@react-native-community/slider';
@@ -37,9 +37,14 @@ const NewSerieScreen = ({serieForm, setField}) => (
     </FormRow>
 
     <FormRow>
+      <View style={styles.rate}>
+        <Text>Nota: </Text>
+        <Text>{serieForm.Nota}</Text>
+      </View>
       <Slider
         minimumValue={0}
         maximumValue={100}
+        step={1}
         value={serieForm.rate}
         onValueChange={value => setField('rate', value)}
       />
@@ -52,6 +57,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingRight: 5,
     paddingLeft: 5,
+  },
+  rate: {
+    flexDirection: 'row',
+    paddingBottom: 10,
   },
 });
 
