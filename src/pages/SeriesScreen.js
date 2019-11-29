@@ -1,16 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {connect} from 'react-redux';
 
 import SerieCard from '../components/SerieCard';
 import AddCard from '../components/AddCard';
-import series from '../../series.json';
 
 const isLeft = number => number % 2 === 0;
 
 const SeriesPage = props => (
   <View>
     <FlatList
-      data={[...series, {isLast: true}]}
+      data={[...props.series, {isLast: true}]}
       renderItem={({item, index}) => {
         return item.isLast ? (
           <AddCard onNavigate={() => props.navigation.navigate('NewSerie')} />
@@ -32,4 +32,10 @@ const SeriesPage = props => (
 
 const styles = StyleSheet.create({});
 
-export default SeriesPage;
+const mapStateToProps = state => {
+  return {
+    series: state.listaSeries,
+  };
+};
+
+export default connect(mapStateToProps)(SeriesPage);
