@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Picker} from 'react-native';
 import {connect} from 'react-redux';
 import {setField} from '../actions';
 
@@ -22,6 +22,17 @@ const NewSerieScreen = ({serieForm, setField}) => (
         value={serieForm.img}
         onChangeText={value => setField('img', value)}
       />
+    </FormRow>
+
+    <FormRow>
+      <Picker
+        selectedValue={serieForm.gender}
+        onValueChange={item => setField('gender', item)}>
+        <Picker.Item label="Ação" value="acao" />
+        <Picker.Item label="Comédia" value="comedy" />
+        <Picker.Item label="Drama" value="drama" />
+        <Picker.Item label="Infantil" value="kids" />
+      </Picker>
     </FormRow>
   </View>
 );
